@@ -7,8 +7,6 @@ spring:
     nacos:
       discovery:
         server-addr: 127.0.0.1:8849
-      config:
-        server-addr: 127.0.0.1:8849
     #配置sentinel
 #    sentinel:
 #      transport:
@@ -26,13 +24,13 @@ spring:
         - id: project-route
           uri: lb://ide-project
           predicates:
-            - Path=/api/ideproject/**
+            - Path=/api/ide/**
           filters:
             - RewritePath=/api/(?<segment>.*),/$\{segment}
 
         - id: admin_route
           uri: lb://ide-admin
           predicates:
-            - Path=/api/**
+            - Path=/api/sys/**
           filters:
-            - RewritePath=/api/(?<segment>.*),/renren-fast/$\{segment}
+            - RewritePath=/api/(?<segment>.*),/$\{segment}

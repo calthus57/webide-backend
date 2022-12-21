@@ -9,6 +9,7 @@
 package io.renren.common.aspect;
 
 import com.google.gson.Gson;
+import com.ustc.webide.common.utils.HttpContextUtils;
 import io.renren.common.annotation.SysLog;
 import io.renren.common.utils.IPUtils;
 import io.renren.modules.sys.entity.SysLogEntity;
