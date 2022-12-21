@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ustc.webide.ideproject.dao.TemplateTableDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.ustc.webide.ideproject.entity.TemplateTableEntity" id="templateTableMap">
+        <result property="templateId" column="template_id"/>
+        <result property="name" column="name"/>
+        <result property="type" column="type"/>
+        <result property="addr" column="addr"/>
+    </resultMap>
+
+
+</mapper>

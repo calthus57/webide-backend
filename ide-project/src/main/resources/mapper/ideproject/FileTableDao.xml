@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ustc.webide.ideproject.dao.FileTableDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.ustc.webide.ideproject.entity.FileTableEntity" id="fileTableMap">
+        <result property="projectId" column="project_id"/>
+        <result property="pid" column="pid"/>
+        <result property="id" column="id"/>
+        <result property="fileType" column="file_type"/>
+        <result property="suffix" column="suffix"/>
+        <result property="fileAddr" column="file_addr"/>
+        <result property="fileName" column="file_name"/>
+        <result property="filetext" column="filetext"/>
+    </resultMap>
+    <delete id="deleteProjectFileList">
+        delete from ide_file_table where project_id=#{projectId}
+    </delete>
+    <select id="getFileTableListByProjectId"
+            resultType="com.ustc.webide.ideproject.entity.FileTableEntity">
+        select * from  ide_file_table where project_id=#{id}
+    </select>
+
+    <!--    <select id="getFileTableListByProjectId"-->
+<!--            resultType="FileTableEntity">-->
+<!--         select * from ide_file_table where project_id=#{id}-->
+<!--    </select>-->
+
+
+</mapper>

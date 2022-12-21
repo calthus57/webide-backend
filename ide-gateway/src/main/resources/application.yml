@@ -1,0 +1,38 @@
+server:
+  port: 88
+spring:
+  application:
+    name: ide-gateway
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8849
+      config:
+        server-addr: 127.0.0.1:8849
+    #配置sentinel
+#    sentinel:
+#      transport:
+#        dashboard: localhost:8080
+#        #控制台的port
+#        port: 8719
+#      scg:
+#        fallback:
+#          #如果限流成功 给我返回json
+#          content-type: application.json
+#          #错误状态码
+#          response-status: 400
+    gateway:
+      routes:
+        - id: project-route
+          uri: lb://ide-project
+          predicates:
+            - Path=/api/ideproject/**
+          filters:
+            - RewritePath=/api/(?<segment>.*),/$\{segment}
+
+        - id: admin_route
+          uri: lb://ide-admin
+          predicates:
+            - Path=/api/**
+          filters:
+            - RewritePath=/api/(?<segment>.*),/renren-fast/$\{segment}
