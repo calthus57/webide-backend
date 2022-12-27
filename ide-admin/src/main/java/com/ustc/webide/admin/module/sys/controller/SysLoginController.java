@@ -1,0 +1,112 @@
+/**
+ * Copyright (c) 2016-2019 人人开源 All rights reserved.
+ * <p>
+ * https://www.renren.io
+ * <p>
+ * 版权所有，侵权必究！
+ */
+
+package com.ustc.webide.admin.module.sys.controller;
+
+import com.ustc.webide.admin.utils.R;
+import com.ustc.webide.admin.module.sys.entity.SysUserEntity;
+import com.ustc.webide.admin.module.sys.form.SysLoginForm;
+import com.ustc.webide.admin.module.sys.service.SignUpService;
+import com.ustc.webide.admin.module.sys.service.SysCaptchaService;
+import com.ustc.webide.admin.module.sys.service.SysUserService;
+import com.ustc.webide.admin.module.sys.service.SysUserTokenService;
+import org.apache.commons.io.IOUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import javax.imageio.ImageIO;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
+import javax.websocket.server.PathParam;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.util.Map;
+
+/**
+ * 登录相关
+ *
+ * @author Mark sunlightcs@gmail.com
+ */
+@RestController
+public class SysLoginController extends AbstractController {
+    @Autowired
+    private SysUserService sysUserService;
+    @Autowired
+    private SysUserTokenService sysUserTokenService;
+    @Autowired
+    private SysCaptchaService sysCaptchaService;
+    @Autowired
+    private SignUpService signUpService;
+    /**
+     * 验证码
+     */
+    @GetMapping("captcha.jpg")
+    public void captcha(HttpServletResponse response, String uuid) throws IOException {
+        response.setHeader("Cache-Control", "no-store, no-cache");
+        response.setContentType("image/jpeg");
+        //获取图片验证码
+        BufferedImage image = sysCaptchaService.getCaptcha(uuid);
+        ServletOutputStream out = response.getOutputStream();
+        ImageIO.write(image, "jpg", out);
+        IOUtils.closeQuietly(out);
+    }
+
+    /**
+     * 登录
+     */
+    @PostMapping("/sys/login")
+    public Map<String, Object> login(@RequestBody SysLoginForm form) throws IOException {
+        /*boolean captcha = sysCaptchaService.validate(form.getUuid(), form.getCaptcha());
+        if (!captcha) {
+            return R.error("验证码不正确");
+        }*/
+        //用户信息
+        SysUserEntity user = sysUserService.queryByUserName(form.getUsername());
+
+        //账号不存在、密码错误
+        /*if (user == null || !user.getPassword().equals(new Sha256Hash(form.getPassword(), user.getSalt()).toHex())) {
+            return R.error("账号或密码不正确");
+        }*/
+        if (user == null || !user.getPassword().equals(form.getPassword())) {
+            return R.error("账号或密码不正确");
+        }
+
+        //账号锁定
+        if (user.getStatus() == 0) {
+            return R.error("账号已被锁定,请联系管理员");
+        }
+
+
+        //生成token，并保存到数据库
+        R r = sysUserTokenService.createToken(user.getUserId());
+//        UserTableEntityTo to = new UserTableEntityTo();
+//        to.setUserId(Integer.parseInt(user.getUserId().toString()));
+        r.put("loginUserId",user.getUserId());
+
+        return r;
+    }
+    @PostMapping("/sys/getSignUpPhoneCheck")
+    public R getSignUpPhoneCheck(@PathParam("phone") String phone){
+        String code = signUpService.getCodeByPhone(phone);
+        if(code.equals(""))
+            return R.error("验证码5分钟内有效，请勿重复发送");
+        signUpService.sendCheckMsg(phone,code);
+        return R.ok().put("phone",phone);
+    }
+    /**
+     * 退出
+     */
+    @PostMapping("/sys/logout")
+    public R logout() {
+        sysUserTokenService.logout(getUserId());
+        return R.ok();
+    }
+
+
+
+}
