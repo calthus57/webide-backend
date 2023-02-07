@@ -1,28 +1,19 @@
-/**
- * Copyright (c) 2016-2019 人人开源 All rights reserved.
- * <p>
- * https://www.renren.io
- * <p>
- * 版权所有，侵权必究！
- */
 
 package com.ustc.webide.admin.module.sys.service.impl;
 
-import com.ustc.webide.common.utils.R;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ustc.webide.admin.exception.RRException;
-import com.ustc.webide.admin.utils.Constant;
-import com.ustc.webide.admin.utils.PageUtils;
-import com.ustc.webide.admin.utils.Query;
 import com.ustc.webide.admin.module.sys.To.UserTableEntityTo;
 import com.ustc.webide.admin.module.sys.dao.SysUserDao;
 import com.ustc.webide.admin.module.sys.entity.SysUserEntity;
-import com.ustc.webide.admin.module.sys.feign.IdeUserFeign;
 import com.ustc.webide.admin.module.sys.service.SysRoleService;
 import com.ustc.webide.admin.module.sys.service.SysUserRoleService;
 import com.ustc.webide.admin.module.sys.service.SysUserService;
+import com.ustc.webide.admin.utils.Constant;
+import com.ustc.webide.admin.utils.PageUtils;
+import com.ustc.webide.admin.utils.Query;
 import org.apache.commons.lang.RandomStringUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.crypto.hash.Sha256Hash;
@@ -51,8 +42,6 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUserEntity> i
     private SysUserDao sysUserDao;
     @Autowired
     private SysUserService sysUserService;
-    @Autowired
-    private IdeUserFeign ideUserFeign;
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
         String username = (String) params.get("username");
@@ -142,8 +131,8 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUserEntity> i
             to.setCreateTime(userEntity.getCreateTime());
             to.setUserId(Integer.parseInt(userEntity.getUserId().toString()));
             to.setUsername(userEntity.getUsername());
-            R save = ideUserFeign.save(to);
-            System.out.println(save.getCode());
+//            R save = ideUserFeign.save(to);
+//            System.out.println(save.getCode());
             return null;
         }
         else return "This username has been signed!";

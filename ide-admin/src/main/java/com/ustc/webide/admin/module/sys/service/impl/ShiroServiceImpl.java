@@ -65,4 +65,9 @@ public class ShiroServiceImpl implements ShiroService {
     public SysUserEntity queryUser(Long userId) {
         return sysUserDao.selectById(userId);
     }
+
+    @Override
+    public SysUserEntity queryUserBytoken(String token) {
+        return queryUser(queryByToken(token).getUserId());
+    }
 }

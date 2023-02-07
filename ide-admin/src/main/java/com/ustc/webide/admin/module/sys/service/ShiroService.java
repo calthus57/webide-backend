@@ -31,4 +31,6 @@ public interface ShiroService {
      * @param userId
      */
     SysUserEntity queryUser(Long userId);
+
+    SysUserEntity queryUserBytoken(String token);
 }

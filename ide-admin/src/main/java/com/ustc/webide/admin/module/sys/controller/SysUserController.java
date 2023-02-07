@@ -9,6 +9,12 @@
 package com.ustc.webide.admin.module.sys.controller;
 
 import com.ustc.webide.admin.annotation.SysLog;
+import com.ustc.webide.admin.module.sys.entity.SysSignupEntity;
+import com.ustc.webide.admin.module.sys.entity.SysUserEntity;
+import com.ustc.webide.admin.module.sys.form.PasswordForm;
+import com.ustc.webide.admin.module.sys.service.ShiroService;
+import com.ustc.webide.admin.module.sys.service.SysUserRoleService;
+import com.ustc.webide.admin.module.sys.service.SysUserService;
 import com.ustc.webide.admin.utils.Constant;
 import com.ustc.webide.admin.utils.PageUtils;
 import com.ustc.webide.admin.utils.R;
@@ -16,11 +22,6 @@ import com.ustc.webide.admin.validator.Assert;
 import com.ustc.webide.admin.validator.ValidatorUtils;
 import com.ustc.webide.admin.validator.group.AddGroup;
 import com.ustc.webide.admin.validator.group.UpdateGroup;
-import com.ustc.webide.admin.module.sys.entity.SysSignupEntity;
-import com.ustc.webide.admin.module.sys.entity.SysUserEntity;
-import com.ustc.webide.admin.module.sys.form.PasswordForm;
-import com.ustc.webide.admin.module.sys.service.SysUserRoleService;
-import com.ustc.webide.admin.module.sys.service.SysUserService;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.crypto.hash.Sha256Hash;
@@ -49,6 +50,9 @@ public class SysUserController extends AbstractController {
     @Autowired
     private RedisTemplate redisTemplate;
 
+    @Autowired
+    private ShiroService shiroService;
+
     /**
      * 所有用户列表
      */
@@ -68,8 +72,9 @@ public class SysUserController extends AbstractController {
      * 获取登录的用户信息
      */
     @GetMapping("/info")
-    public R info() {
-        return R.ok().put("user", getUser());
+    public R info(@RequestHeader("token")String token) {
+        SysUserEntity userEntity = shiroService.queryUserBytoken(token);
+        return R.ok().put("user", userEntity);
     }
 
     /**
@@ -108,6 +113,7 @@ public class SysUserController extends AbstractController {
 
         return R.ok().put("user", user);
     }
+
 
     /**
      * 保存用户
