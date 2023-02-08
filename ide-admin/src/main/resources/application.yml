@@ -1,16 +1,12 @@
 # Tomcat
 server:
-  tomcat:
-    uri-encoding: UTF-8
-    max-threads: 1000
-    min-spare-threads: 30
   port: 8088
-  connection-timeout: 5000ms
-#  servlet:
-#    context-path: /renren-fast
 
 spring:
-  # 环境 dev|test|prod
+  application:
+    name: ide-admin
+    config:
+      enabled: false #禁用nacos-config自动配置功能
   profiles:
     active: dev
   # jackson时间格式化
@@ -43,17 +39,13 @@ spring:
     nacos:
       discovery:
         server-addr: 127.0.0.1:8849
-  application:
-    name: ide-admin
-    config:
-      enabled: false #禁用nacos-config自动配置功能
 
 
 #mybatis
 mybatis-plus:
   mapper-locations: classpath*:/mapper/**/*.xml
   #实体扫描，多个package用逗号或者分号分隔
-  typeAliasesPackage: io.renren.modules.*.entity
+  typeAliasesPackage: com.ustc.webide.modules.*.entity
   global-config:
     #数据库相关配置
     db-config:

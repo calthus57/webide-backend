@@ -27,7 +27,6 @@ import com.ustc.webide.ideproject.entity.ProjectTableEntity;
 import com.ustc.webide.ideproject.service.ProjectTableService;
 import org.springframework.transaction.annotation.Transactional;
 
-
 @Service("projectTableService")
 public class ProjectTableServiceImpl extends ServiceImpl<ProjectTableDao, ProjectTableEntity> implements ProjectTableService {
     @Autowired

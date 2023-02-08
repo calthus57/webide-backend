@@ -9,16 +9,15 @@ import java.util.concurrent.*;
 //自定义线程池
 @Configuration
 public class MyThreadConfig {
-
     @Bean
-    public ThreadPoolExecutor threadPoolExecutor(ThreadPoolConfigProperties pool){
-        return  new ThreadPoolExecutor(
+    public ThreadPoolExecutor threadPoolExecutor(ThreadPoolConfigProperties pool) {
+        return new ThreadPoolExecutor(
                 pool.getCoreSize(),
                 pool.getMaxSize(),
                 pool.getKeepAliveTime(),
-                TimeUnit.SECONDS,new LinkedBlockingDeque<>(100000),
+                TimeUnit.SECONDS, new LinkedBlockingDeque<>(100000),
                 Executors.defaultThreadFactory(),
-                new java.util.concurrent.ThreadPoolExecutor.AbortPolicy()
+                new ThreadPoolExecutor.AbortPolicy()
         );
     }
 }

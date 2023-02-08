@@ -9,8 +9,6 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 
- *
  * @author ybf
  * @email ${email}
  * @date 2021-10-09 12:33:56
@@ -34,6 +32,7 @@ public interface ProjectTableService extends IService<ProjectTableEntity> {
     void removeByProjectEntity(ProjectTableEntity projectTableEntity);
 
     void runProjectById(Integer projectId);
+
     void testProject();
 }
 

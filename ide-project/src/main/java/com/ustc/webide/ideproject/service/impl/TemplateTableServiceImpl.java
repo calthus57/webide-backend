@@ -16,7 +16,6 @@ import com.ustc.webide.ideproject.service.TemplateTableService;
 
 @Service("templateTableService")
 public class TemplateTableServiceImpl extends ServiceImpl<TemplateTableDao, TemplateTableEntity> implements TemplateTableService {
-
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
         IPage<TemplateTableEntity> page = this.page(
