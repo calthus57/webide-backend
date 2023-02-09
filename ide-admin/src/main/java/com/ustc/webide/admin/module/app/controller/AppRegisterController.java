@@ -9,13 +9,11 @@
 package com.ustc.webide.admin.module.app.controller;
 
 
-import com.ustc.webide.admin.utils.R;
-import com.ustc.webide.admin.validator.ValidatorUtils;
 import com.ustc.webide.admin.module.app.entity.UserEntity;
 import com.ustc.webide.admin.module.app.form.RegisterForm;
 import com.ustc.webide.admin.module.app.service.UserService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import com.ustc.webide.admin.utils.R;
+import com.ustc.webide.admin.validator.ValidatorUtils;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,13 +30,11 @@ import java.util.Date;
  */
 @RestController
 @RequestMapping("/app")
-@Api("APP注册接口")
 public class AppRegisterController {
     @Autowired
     private UserService userService;
 
     @PostMapping("register")
-    @ApiOperation("注册")
     public R register(@RequestBody RegisterForm form) {
         //表单校验
         ValidatorUtils.validateEntity(form);

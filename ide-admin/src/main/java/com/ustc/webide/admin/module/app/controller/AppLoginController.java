@@ -9,13 +9,11 @@
 package com.ustc.webide.admin.module.app.controller;
 
 
-import com.ustc.webide.admin.utils.R;
-import com.ustc.webide.admin.validator.ValidatorUtils;
 import com.ustc.webide.admin.module.app.form.LoginForm;
 import com.ustc.webide.admin.module.app.service.UserService;
 import com.ustc.webide.admin.module.app.utils.JwtUtils;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import com.ustc.webide.admin.utils.R;
+import com.ustc.webide.admin.validator.ValidatorUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -32,7 +30,6 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/app")
-@Api("APP登录接口")
 public class AppLoginController {
     @Autowired
     private UserService userService;
@@ -43,7 +40,6 @@ public class AppLoginController {
      * 登录
      */
     @PostMapping("login")
-    @ApiOperation("登录")
     public R login(@RequestBody LoginForm form) {
         //表单校验
         ValidatorUtils.validateEntity(form);

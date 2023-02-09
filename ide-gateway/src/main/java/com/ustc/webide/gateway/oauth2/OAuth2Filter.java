@@ -11,7 +11,7 @@ package com.ustc.webide.gateway.oauth2;
 import com.google.gson.Gson;
 import com.ustc.webide.common.utils.HttpContextUtils;
 import com.ustc.webide.common.utils.R;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpStatus;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationToken;

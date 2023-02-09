@@ -1,10 +1,10 @@
 package com.ustc.webide.gateway;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class GulimallGatewayApplicationTests {
+public class IdeGatewayApplicationTests {
 
     @Test
     void contextLoads() {

@@ -5,8 +5,12 @@ server:
 spring:
   application:
     name: ide-admin
-    config:
-      enabled: false #禁用nacos-config自动配置功能
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8849
+          # 集群名
+        cluster-name: Suzhou
   profiles:
     active: dev
   # jackson时间格式化
@@ -33,13 +37,8 @@ spring:
         min-idle: 5       # 连接池中的最小空闲连接
   mvc:
     throw-exception-if-no-handler-found: true
-#  resources:
-#    add-mappings: false
-  cloud:
-    nacos:
-      discovery:
-        server-addr: 127.0.0.1:8849
-
+  main:
+    allow-circular-references: true
 
 #mybatis
 mybatis-plus:

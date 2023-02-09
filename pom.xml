@@ -32,7 +32,6 @@
         <module>ide-project</module>
     </modules>
 
-	<!-- 引入spring cloud 的相关依赖管理就不用写版本号了-->
 	<dependencyManagement>
 		<dependencies>
 			<dependency>

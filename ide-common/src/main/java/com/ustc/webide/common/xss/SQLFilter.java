@@ -9,7 +9,7 @@
 package com.ustc.webide.common.xss;
 
 import com.ustc.webide.common.exception.RRException;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * SQL过滤
