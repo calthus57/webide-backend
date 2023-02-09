@@ -6,7 +6,8 @@
  * 版权所有，侵权必究！
  */
 
-package com.ustc.webide.gateway.entity;
+package com.ustc.webide.common.feign.entity;
+
 
 import lombok.Data;
 

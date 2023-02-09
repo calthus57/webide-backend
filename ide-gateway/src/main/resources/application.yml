@@ -8,26 +8,13 @@ spring:
     nacos:
       discovery:
         server-addr: 127.0.0.1:8849
-        # 集群名
-        cluster-name: Suzhou
-    #配置sentinel
-    #    sentinel:
-    #      transport:
-    #        dashboard: localhost:8080
-    #        #控制台的port
-    #        port: 8719
-    #      scg:
-    #        fallback:
-    #          #如果限流成功 给我返回json
-    #          content-type: application.json
-    #          #错误状态码
-    #          response-status: 400
+        cluster-name: Suzhou     # 集群名
     gateway:
       routes:
         - id: project-route
           uri: lb://ide-project
           predicates:
-            - Path=/api/ide/**
+            - Path=/api/ide/**  # 以 /api/ide/ 开头
           filters:
             - RewritePath=/api/(?<segment>.*),/$\{segment}
 
@@ -37,3 +24,17 @@ spring:
             - Path=/api/sys/**
           filters:
             - RewritePath=/api/(?<segment>.*),/$\{segment}
+management:
+  endpoints:
+    web:
+      exposure:
+        include: all
+feign:
+  client:
+    config:
+      default:
+        logger-level: basic
+  httpclient:
+    enabled: true  # 支持 httpclient 连接池
+    max-connections: 200   # 最大的连接数
+    max-connections-per-route: 50   # 每个路径最大的连接数

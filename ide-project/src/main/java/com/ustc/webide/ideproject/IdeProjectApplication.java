@@ -6,7 +6,6 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
 
-//注册到注册中心（发现中心）
 @EnableDiscoveryClient
 @SpringBootApplication
 @EnableFeignClients

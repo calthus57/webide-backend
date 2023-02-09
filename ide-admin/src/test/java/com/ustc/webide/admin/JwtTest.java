@@ -1,4 +1,4 @@
-package io.renren;
+package com.ustc.webide.admin;
 
 import com.ustc.webide.admin.module.app.utils.JwtUtils;
 import org.junit.jupiter.api.Test;

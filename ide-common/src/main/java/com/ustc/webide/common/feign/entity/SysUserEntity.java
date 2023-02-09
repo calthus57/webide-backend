@@ -6,21 +6,14 @@
  * 版权所有，侵权必究！
  */
 
-package com.ustc.webide.gateway.entity;
+package com.ustc.webide.common.feign.entity;
 
 import lombok.Data;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-/**
- * 系统用户
- *
- * @author Mark sunlightcs@gmail.com
- */
 @Data
 public class SysUserEntity implements Serializable {
     private static final long serialVersionUID = 1L;

@@ -1,7 +1,7 @@
-package com.ustc.webide.gateway.feignClient;
+package com.ustc.webide.common.feign;
 
-import com.ustc.webide.gateway.entity.SysUserEntity;
-import com.ustc.webide.gateway.entity.SysUserTokenEntity;
+import com.ustc.webide.common.feign.entity.SysUserEntity;
+import com.ustc.webide.common.feign.entity.SysUserTokenEntity;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

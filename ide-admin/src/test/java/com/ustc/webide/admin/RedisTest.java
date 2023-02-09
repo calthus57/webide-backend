@@ -1,4 +1,4 @@
-package io.renren;
+package com.ustc.webide.admin;
 
 import org.springframework.boot.test.context.SpringBootTest;
 

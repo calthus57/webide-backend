@@ -8,9 +8,9 @@
 
 package com.ustc.webide.gateway.oauth2;
 
-import com.ustc.webide.gateway.entity.SysUserEntity;
-import com.ustc.webide.gateway.entity.SysUserTokenEntity;
-import com.ustc.webide.gateway.feignClient.ShiroClient;
+import com.ustc.webide.common.feign.entity.SysUserEntity;
+import com.ustc.webide.common.feign.entity.SysUserTokenEntity;
+import com.ustc.webide.common.feign.ShiroClient;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;

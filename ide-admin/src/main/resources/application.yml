@@ -60,6 +60,12 @@ mybatis-plus:
     call-setters-on-nulls: true
     jdbc-type-for-null: 'null'
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: all
+
 
 renren:
   redis:
